@@ -23,7 +23,7 @@ jobs:
       - name: Build Docker Image
         uses: actions/docker@v2
         with:
-          image: ${{ GITHUB_REPOSITORY }}
+          image: ${{ github.repository }}
           context: .
           dockerfile: Dockerfile
           args: build
@@ -31,7 +31,7 @@ jobs:
       - name: Push Docker Image
         uses: actions/docker@v2
         with:
-          image: ${{ GITHUB_REPOSITORY	 }}
+          image: ${{ github.repository }}
           context: .
           dockerfile: Dockerfile
           args: push

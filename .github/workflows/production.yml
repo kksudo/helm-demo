@@ -6,31 +6,7 @@ on:
       - master
 
 jobs:
-  docker-build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Docker Image
-        uses: actions/docker@v2
-        with:
-          image: ${{ github.repository.name }}
-          context: .
-          dockerfile: Dockerfile
-          args: build
-      - name: Push Docker Image
-        uses: actions/docker@v2
-        with:
-          image: ${{ github.repository.name }}
-          context: .
-          dockerfile: Dockerfile
-          args: push
-    
+  
   deploy:
     runs-on: ubuntu-latest
     steps:
