@@ -6,6 +6,35 @@ on:
       - develop
 
 jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker Image
+        uses: actions/docker@v2
+        with:
+          image: ${{ github.repository.name }}
+          context: .
+          dockerfile: Dockerfile
+          args: build
+          tags: ${{ github.sha }}, branch-${{ github.ref }}
+      - name: Push Docker Image
+        uses: actions/docker@v2
+        with:
+          image: ${{ github.repository.name }}
+          context: .
+          dockerfile: Dockerfile
+          args: push
+          tags: ${{ github.sha }}, branch-${{ github.ref }}
+          
   deploy:
     runs-on: ubuntu-latest
 
