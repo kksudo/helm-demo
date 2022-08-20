@@ -20,22 +20,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Docker Image
-        uses: actions/docker@v2
+      - name: Build and push
+        uses: docker/build-push-action@v3
         with:
-          image: ${{ github.repository }}
           context: .
-          dockerfile: Dockerfile
-          args: build
-          tags: ${{ github.sha }}, branch-${{ github.ref }}
-      - name: Push Docker Image
-        uses: actions/docker@v2
-        with:
-          image: ${{ github.repository }}
-          context: .
-          dockerfile: Dockerfile
-          args: push
-          tags: ${{ github.sha }}, branch-${{ github.ref }}
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository.name }}:${{ github.repository.ref}}
           
   deploy:
     runs-on: ubuntu-latest
