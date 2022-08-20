@@ -13,4 +13,3 @@ Make changes into the src/ directory and push it to GitHub develop or main branc
 2. CD into github-actions-heroku.
 3. run `yarn/npm install`.
 4. run `yarn start/npm run start`.
-
