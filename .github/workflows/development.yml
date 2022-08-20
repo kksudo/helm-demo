@@ -18,10 +18,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Build Docker Image
         uses: actions/docker@v2
         with:
-          image: ${{ github.repository.name }}
+          image: ${{ GITHUB_REPOSITORY }}
           context: .
           dockerfile: Dockerfile
           args: build
@@ -29,7 +31,7 @@ jobs:
       - name: Push Docker Image
         uses: actions/docker@v2
         with:
-          image: ${{ github.repository.name }}
+          image: ${{ GITHUB_REPOSITORY	 }}
           context: .
           dockerfile: Dockerfile
           args: push
