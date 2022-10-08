@@ -29,7 +29,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: kksudo/helm-demo:develop,kksudo/helm-demo:$LOCAL_ENV-${{ github.sha }}
+          tags: kksudo/helm-demo:develop,kksudo/helm-demo:${{ env.LOCAL_ENV }}-${{ github.sha }}
           
   helm-check:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
           version: v3.10.0
       - name: helm lint
         run: |
-          helm lint helm/helm-demo -f helm/environments/$LOCAL_ENV/values.yaml
+          helm lint helm/helm-demo -f helm/environments/${{ env.LOCAL_ENV }}/values.yaml
         
   deploy:
     runs-on: ubuntu-latest
@@ -63,4 +63,4 @@ jobs:
         with:
           SA_KEY: ${{ secrets.YC_SA_KEY }}
           K8S_CLUSTER_ID: cat18t221ikr50a0hb4i
-          HELM_ARGS: -n $LOCAL_ENV install app ./helm/helm-demo  -f helm/environments/$LOCAL_ENV/values.yaml
+          HELM_ARGS: -n $LOCAL_ENV install app ./helm/helm-demo  -f helm/environments/${{ env.LOCAL_ENV }}/values.yaml
