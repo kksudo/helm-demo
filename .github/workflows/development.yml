@@ -4,13 +4,17 @@ on:
   push:
     branches:
       - develop
-
+env:
+  LOCAL_ENV: development
+  
 jobs:
-  docker-build:
+  image-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -25,4 +29,19 @@ jobs:
         with:
           context: .
           push: true
-          tags: kksudo/helm-demo:develop,kksudo/helm-demo:develop-${{ github.sha }}
+          tags: kksudo/helm-demo:develop,kksudo/helm-demo:$LOCAL_ENV-${{ github.sha }}
+          
+  helm-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Helm
+          uses: azure/setup-helm@v3
+          with:
+            version: v3.10.0
+      - name: helm lint
+        run: |
+          helm lint helm/helm-demo -f helm/environments/$LOCAL_ENV/values.yaml
+        
+      
