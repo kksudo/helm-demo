@@ -29,4 +29,4 @@ GitHub actions:
 
 1. `docker build -t react-demo:0.0.2 .`
 2. `docker run -d --rm --name react -p 8080:80 react-demo:0.0.2`
-3. open [http://localhost:8080](http://localhost:8080) in your browser.
+3. open [http://localhost:8080](http://localhost:8080) in your browser. 
