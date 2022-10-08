@@ -59,4 +59,4 @@ jobs:
         with:
           SA_KEY: ${{ secrets.YC_SA_KEY }}
           K8S_CLUSTER_ID: cat18t221ikr50a0hb4i
-          HELM_ARGS: -n ${{ env.LOCAL_ENV }} install app ./helm/helm-demo  -f helm/environments/${{ env.LOCAL_ENV }}/values.yaml
+          HELM_ARGS:  install app ./helm/helm-demo -n ${{ env.LOCAL_ENV }} -f ./helm/environments/${{ env.LOCAL_ENV }}/values.yaml --create-namespace
