@@ -6,7 +6,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "develop"
   
-fullnameOverride: "develop-it-onedevopschampion"
+fullnameOverride: "development-it-onedevopschampion"
 
 service:
   type: ClusterIP
