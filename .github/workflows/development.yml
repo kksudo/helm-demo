@@ -37,9 +37,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Set up Helm
-          uses: azure/setup-helm@v3
-          with:
-            version: v3.10.0
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.10.0
       - name: helm lint
         run: |
           helm lint helm/helm-demo -f helm/environments/$LOCAL_ENV/values.yaml
