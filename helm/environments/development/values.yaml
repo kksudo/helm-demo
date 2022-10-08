@@ -19,14 +19,14 @@ ingress:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt"
   hosts:
-    - host: $LOCAL_ENV.lclhost.xyz
+    - host: development.lclhost.xyz
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - $LOCAL_ENV.lclhost.xyz
-      secretName: $LOCAL_ENV-lclhost-xyz
+        - development.lclhost.xyz
+      secretName: development-lclhost-xyz
 
 autoscaling:
   enabled: false
