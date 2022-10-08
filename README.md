@@ -1,4 +1,6 @@
-# A demo repository to show how to use GitHub actions with the common app development tasks 
+# A helm-demo repository 
+
+A helm-demo repository to show how to use GitHub actions with the common app development tasks
 
 ## What this repository does
 
