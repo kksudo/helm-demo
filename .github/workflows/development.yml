@@ -18,31 +18,11 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: kksudo
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: kksudo/agora-hack:latest
-          
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Development Code
-        uses: actions/checkout@v2
-      - name: Use Node.js 17.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 17.x
-      - run: npm install
-      - run: npm run build --if-present
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          args: deploy --dir=build --prod
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'gh-act-heroku-agora-hack-dev'
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          tags: kksudo/helm-demo:develop,kksudo/helm-demo:develop-${{ github.sha }}
